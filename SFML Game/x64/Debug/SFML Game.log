@@ -1,0 +1,77 @@
+﻿  main.cpp
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(392,52): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(394,28): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(401,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(403,30): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(410,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(412,30): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(419,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(421,30): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(428,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(430,31): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(437,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(439,31): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(446,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(448,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(455,53): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(457,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(464,54): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(466,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(485,55): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(487,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(494,55): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(496,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(503,55): warning C4244: 'argument' : conversion de 'int' en 'T', perte possible de données
+          with
+          [
+              T=float
+          ]
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(505,32): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(516,45): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(526,45): warning C4305: 'argument' : troncation de 'double' à 'float'
+X:\tout le reste\visual studio 2022 project\SFML Game\main.cpp(536,45): warning C4305: 'argument' : troncation de 'double' à 'float'
+  SFML Game.vcxproj -> X:\tout le reste\visual studio 2022 project\SFML Game\x64\Debug\SFML Game.exe
