@@ -1,0 +1,1764 @@
+#include <SFML/Audio.hpp>
+#include  <SFML/Graphics.hpp>
+#include <fstream>
+
+
+int main()
+{
+    sf::Clock clock;
+
+    const std::string pnegg = "C:/Game/resources/pngegg.png";
+    const std::string planeDown = "C:/Game/resources/avions vers le bas.png";
+    const std::string plaeUp = "C:/Game/resources/avion vers le haut.png";
+    const std::string ExplosionPlane = "C:/Game/resources/Explosion de l'avion.png";
+
+    const std::string Plane2Base = "C:/Game/resources/Plane2Basetesttttteetttettetete.png";
+    const std::string Plane2Down = "C:/Game/resources/Plane2Down.png";
+    const std::string Plane2Up = "C:/Game/resources/Plane2Up.png";
+
+    const std::string Plane3Base = "C:/Game/resources/Plane3Base.png";
+    const std::string Plane3Down = "C:/Game/resources/Plane3Down.png";
+    const std::string Plane3Up = "C:/Game/resources/Plane3Up.png";
+
+    const std::string cloud27 = "C:/Game/resources/rain-clouds-png-27.png";
+    const std::string cloud30 = "C:/Game/resources/30-white-clouds-png-image.png";
+    const std::string cloud19 = "C:/Game/resources/19-cloud-png-image.png";
+    const std::string cloud12 = "C:/Game/resources/12-cloud-png-image.png";
+    const std::string cloud10 = "C:/Game/resources/10-cloud-png-image.png";
+    const std::string missilees = "C:/Game/resources/Missile-Rocket-Transparent-PNG.png";
+    const std::string GameOveer = "C:/Game/resources/Game over text picture.png";
+    const std::string MeuPrincipal = "C:/Game/resources/MenuPrincipalImage.png";
+    const std::string backgroundS = "C:/Game/resources/Background.png";
+    const std::string FontS = "C:/Game/resources/arial.ttf";
+    const std::string MyOwnMissileS = "C:/Game/resources/Explosion de l'avion.png";
+    const std::string MyOwnMissileSmokeS = "C:/Game/resources/FireSmoke.png";
+
+    const std::string FontT = "C:/Game/resources/arial.ttf";
+
+    // Créer la fenêtre
+    sf::RenderWindow window(sf::VideoMode(1500, 920), "Planum");
+
+    window.setVerticalSyncEnabled(true);
+
+    // Charger l'image
+    sf::Texture texture, texture2, texture3, texture4;
+    if (!texture.loadFromFile(pnegg) || !texture2.loadFromFile(planeDown) || !texture3.loadFromFile(plaeUp) || !texture4.loadFromFile(ExplosionPlane))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite sprite(texture);
+
+    sprite.setOrigin(550, 302);
+    sprite.setPosition(-130, -120);
+
+
+    // Charger l'image
+    sf::Texture texturePlane2Base, texturePlane2Down, texturePlane2Up;
+    if (!texturePlane2Base.loadFromFile(Plane2Base) || !texturePlane2Down.loadFromFile(Plane2Down) || !texturePlane2Up.loadFromFile(Plane2Up))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite sprite2(texturePlane2Base);
+
+    sprite2.setOrigin(550, 302);
+    sprite2.setPosition(-130, -120);
+
+
+
+
+    // Charger l'image
+    sf::Texture texturePlane3Base, texturePlane3Down, texturePlane3Up;
+    if (!texturePlane3Base.loadFromFile(Plane3Base) || !texturePlane3Down.loadFromFile(Plane3Down) || !texturePlane3Up.loadFromFile(Plane3Up))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite sprite3(texturePlane3Base);
+
+    sprite3.setOrigin(550, 302);
+    sprite3.setPosition(-130, -120);
+    sprite3.setRotation(90);
+
+    sf::RectangleShape ShapCollision(sf::Vector2f(60, 40));
+    ShapCollision.setFillColor(sf::Color(0xDA, 0xE8, 0xFC));
+    ShapCollision.setPosition(90, 200);
+    ShapCollision.setOrigin(30, 20);
+    ShapCollision.setFillColor(sf::Color(255, 255, 255, 0));
+
+    //--------------------------------Les nuages----------------------------------------------
+
+    // Charger l'image
+    sf::Texture clouds;
+    if (!clouds.loadFromFile(cloud27))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss(clouds);
+
+    // Charger l'image
+    sf::Texture clouds2;
+    if (!clouds2.loadFromFile(cloud30))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss2(clouds2);
+
+    // Charger l'image
+    sf::Texture clouds3;
+    if (!clouds3.loadFromFile(cloud19))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss3(clouds3);
+
+    // Charger l'image
+    sf::Texture clouds4;
+    if (!clouds4.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss4(clouds4);
+
+
+    // Charger l'image
+    sf::Texture clouds6;
+    if (!clouds6.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss6(clouds6);
+
+    cloudss6.setPosition(200.f, 200.f);
+
+
+    // Charger l'image
+    sf::Texture clouds7;
+    if (!clouds7.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss7(clouds7);
+
+
+    // Charger l'image
+    sf::Texture clouds8;
+    if (!clouds8.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss8(clouds8);
+
+    // Charger l'image
+    sf::Texture clouds9;
+    if (!clouds9.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss9(clouds9);
+
+    // Charger l'image
+    sf::Texture clouds10;
+    if (!clouds10.loadFromFile(cloud12))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss10(clouds10);
+
+    // Charger l'image
+    sf::Texture clouds5;
+    if (!clouds5.loadFromFile(cloud10))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite cloudss5(clouds5);
+
+    //sf::Font font;
+    //if (!font.loadFromFile("X:/tout le reste/Images, videos et musiques/GAME OVER font police.ttf"))
+    //{
+    //    return -1; // Erreur de chargement de la police
+    //}
+    //sf::Text message("Bonjour le monde !", font, 30);
+    //message.setFillColor(sf::Color::White);
+    //message.setPosition(100, 100);
+
+    //-------------------------------------------------Missiles--------------------------------------------------------
+
+
+        // Charger l'image
+    sf::Texture Missile1, Missile11;
+    if (!Missile1.loadFromFile(missilees) || !Missile11.loadFromFile(MyOwnMissileS))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite Missileee1(Missile1);
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth2 = Missile1.getSize().x / 2;
+    int newHeight2 = Missile1.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    Missileee1.setScale(.09f, .09f);
+
+    // Charger l'image
+    sf::Texture Missile2;
+    if (!Missile2.loadFromFile(missilees))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite Missileee2(Missile2);
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth3 = Missile2.getSize().x / 2;
+    int newHeight3 = Missile2.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    Missileee2.setScale(.09f, .09f); // Double la taille de l'image
+
+
+    // Charger l'image
+    sf::Texture Missile3;
+    if (!Missile3.loadFromFile(missilees))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite Missileee3(Missile3);
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth4 = Missile3.getSize().x / 2;
+    int newHeight4 = Missile3.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    Missileee3.setScale(.09f, .09f); // Double la taille de l'image
+
+
+    // Charger l'image
+    sf::Texture MyOwnMissile;
+    if (!MyOwnMissile.loadFromFile(missilees))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite MyOwnMissilee(MyOwnMissile);
+    sf::Sprite Missile111(Missile11);
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth28 = MyOwnMissile.getSize().x / 2;
+    int newHeight28 = MyOwnMissile.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    MyOwnMissilee.setScale(.09f, .09f); // Double la taille de l'image
+    MyOwnMissilee.setPosition(-3000, -3000);
+
+    // Charger l'image
+    sf::Texture MyOwnMissileSmoke;
+    if (!MyOwnMissileSmoke.loadFromFile(MyOwnMissileSmokeS))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite MyOwnMissileSmokee(MyOwnMissileSmoke);
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth29 = MyOwnMissileSmoke.getSize().x / 2;
+    int newHeight29 = MyOwnMissileSmoke.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    MyOwnMissileSmokee.setScale(.5f, .5f); // Double la taille de l'image
+    MyOwnMissileSmokee.setColor(sf::Color(255, 255, 255, 150));
+    MyOwnMissileSmokee.setOrigin(150, 800);
+
+
+    Missileee1.setPosition(1600.f, 689);
+
+    Missileee2.setPosition(1600.f, 463);
+
+    Missileee3.setPosition(1600.f, 500);
+
+
+   //---------------------------------------------- initailisation de la taille caché------------------------------------------------------
+
+    Missileee1.setScale(.00009f, .000009f);
+    Missileee2.setScale(.00009f, .000009f);
+    Missileee3.setScale(.00009f, .000009f);
+
+    //---------------------------------Texte-----------------------------------------
+
+    sf::Font font;
+    font.loadFromFile(FontS);
+    sf::Text text;
+    text.setString("GAME OVER");
+    text.setCharacterSize(25);
+    text.setFillColor(sf::Color::Red);
+    text.setStyle(sf::Text::Bold);
+    text.setPosition(300, 300);
+    sf::Text::Underlined;
+
+
+
+    // Charger l'image
+    sf::Texture textOV;
+    if (!textOV.loadFromFile(GameOveer))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite textOVV(textOV);
+
+
+    // Définir l'échelle de l'image
+    textOVV.setScale(.005f, .005f); // Double la taille de l'image
+
+    textOVV.setPosition(3000, -3000);
+
+
+    // Charger l'image
+    sf::Texture MenuP;
+    if (!MenuP.loadFromFile(MeuPrincipal))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite (l'image affichée dans la fenêtre)
+    sf::Sprite MenuPP(MenuP);
+
+
+    // Définir l'échelle de l'image
+    MenuPP.setScale(.68, .68); // Double la taille de l'image
+
+    MenuPP.setPosition(220, 50);
+
+    //------------------------------------------------------------------
+
+
+    // Définir la nouvelle taille de l'image (par exemple, doubler la taille)
+    int newWidth = texture.getSize().x / 2;
+    int newHeight = texture.getSize().y / 2;
+
+
+    // Définir l'échelle de l'image
+    sprite.setScale(.2f, .2f); // Double la taille de l'image
+
+    sprite.setRotation(0); // Double la taille de l'image
+
+
+
+    // Position initiale du sprite
+    float x = 0.f;
+    float y = 0.f;
+
+    // Charger l'image d'arrière-plan
+    sf::Texture backgroundTexture;
+    if (!backgroundTexture.loadFromFile(backgroundS))
+    {
+        return 1; // Erreur de chargement de l'image
+    }
+
+    // Créer le sprite pour l'arrière-plan
+    sf::Sprite background(backgroundTexture);
+
+
+    // Définir l'échelle de l'image
+    background.setScale(1.f, 1.f); // Double la taille de l'image
+
+    //------------------------------------Musique--------------------------------------------------------
+
+    // Load a music to play
+    sf::Music music;
+    if (!music.openFromFile("C:/Game/resources/Music/bruits de vent.wav"))
+        return EXIT_FAILURE;
+
+
+    music.setLoop(window.isOpen());
+
+    // Play the music
+    music.play();
+
+    music.setVolume(55);
+
+    // Load a music to play
+    sf::Music EpicMusic;
+    if (!EpicMusic.openFromFile("C:/Game/resources/Music/WarEpicSoundtrack.wav"))
+        return EXIT_FAILURE;
+
+
+    EpicMusic.setLoop(window.isOpen());
+
+    // Play the music
+    EpicMusic.play();
+
+    // Load a music to play
+    sf::Music music2;
+    if (!music2.openFromFile("C:/Game/resources/Music/Missile launch Sound effect.wav"))
+        return EXIT_FAILURE;
+
+    music2.setVolume(50);
+
+
+    music.setLoop(window.isOpen());
+
+    // Load a music to play
+    sf::Music music3;
+    if (!music3.openFromFile("C:/Game/resources/Music/Explosion Effect.wav"))
+        return EXIT_FAILURE;
+
+
+    music3.setLoop(window.isOpen());
+
+
+    // Load a music to play
+    sf::Music PlaneSound;
+    if (!PlaneSound.openFromFile("C:/Game/resources/Music/PlaneSound.wav"))
+        return EXIT_FAILURE;
+
+
+    PlaneSound.setLoop(window.isOpen());
+
+    PlaneSound.setVolume(50);
+
+
+    float speed = .05f;
+    float speeds = .0f;
+
+    float sppedOfMyMissile = 15.1;
+
+
+    float angle = 0.0f;
+    float rotationBall = 0;
+
+    float ballMenuMove = 1;
+
+    bool explosionscale = false;
+    float elapsed = 0.0f;
+    float elapsed2 = 0.0f;
+    float Opacite = 255;
+    float Opacite2 = 40;
+    bool explosionopacite = false;
+    bool canFire = true;
+    bool canFire2 = false;
+    bool smokeOpacite = false;
+    bool startGameMode = true;
+    bool progressiveMode = false;
+    float missileSpeed1 = -5.1;
+    float missileSpeed2 = -3.1;
+    float missileSpeed3 = -4.4;
+    bool plane1 = false;
+    bool plane2 = false;
+    bool plane3 = false;
+    // position en y du soleil
+    int PoseYBall = 300;
+    // le nombre de pixel de déplacement du soleil à chaque tour de la boucle d'animation
+    int VarBallMove = -1;
+
+    bool startGame = false;
+
+
+    //--------------------------------------------------------------Tetxe--------------------------------------------------------------
+
+    int score = 0;
+
+    //Best score
+    sf::Font font3;
+    font3.loadFromFile(FontT);
+    sf::Text bestscoreTextR;
+    bestscoreTextR.setFont(font3);
+    bestscoreTextR.setCharacterSize(24);
+    bestscoreTextR.setFillColor(sf::Color::Black);
+    bestscoreTextR.setStyle(sf::Text::Bold);
+    bestscoreTextR.setPosition(-647, -62);
+
+
+    sf::Text scoreText;
+    scoreText.setFont(font);
+    scoreText.setCharacterSize(34);
+    scoreText.setFillColor(sf::Color::Black);
+    scoreText.setStyle(sf::Text::Bold);
+    scoreText.setPosition(-700, -20);
+
+    int metre = 0;
+    int kilometre = 0;
+
+    sf::Text Distance;
+    Distance.setFont(font);
+    Distance.setCharacterSize(34);
+    Distance.setFillColor(sf::Color::Black);
+    Distance.setStyle(sf::Text::Bold);
+    Distance.setPosition(-620, -860);
+
+    int bestDistance = 0;
+
+    sf::Text BestDistance;
+    BestDistance.setFont(font);
+    BestDistance.setCharacterSize(24);
+    BestDistance.setFillColor(sf::Color::Black);
+    BestDistance.setStyle(sf::Text::Bold);
+    BestDistance.setPosition(-617, -92);
+
+
+    sf::Text NotEnough;
+    NotEnough.setFont(font);
+    NotEnough.setCharacterSize(24);
+    NotEnough.setFillColor(sf::Color::Black);
+    NotEnough.setStyle(sf::Text::Bold);
+    NotEnough.setPosition(617, 92);
+
+    sf::Text Tuto;
+    Tuto.setFont(font);
+    Tuto.setCharacterSize(14);
+    Tuto.setFillColor(sf::Color::Black);
+    Tuto.setStyle(sf::Text::Bold);
+    Tuto.setPosition(20, 888);
+
+    Tuto.setString("[T]: fire, [R]: respawn");
+
+    //-------------------------------------------------------Sauvegarde du score---------------------------------------------------------
+
+    // Chargement du score à partir du fichier "score.txt"
+    int BestScore = 0;
+    std::ifstream inputFile("score.txt");
+    if (inputFile.is_open()) {
+        inputFile >> BestScore;
+        inputFile.close();
+    }
+    bestscoreTextR.setString("your best score is: " + std::to_string(BestScore));
+
+
+    std::ifstream inputFile2("Distance.txt");
+    if (inputFile2.is_open()) {
+        inputFile2 >> bestDistance;
+        inputFile2.close();
+    }
+    bestscoreTextR.setString("your best score is: " + std::to_string(BestScore));
+
+    // Boucle principale
+    while (window.isOpen())
+    {
+        // Gérer les événements
+        sf::Event event;
+        while (window.pollEvent(event))
+        {
+            // Fermer la fenêtre lorsqu'on clique sur la croix
+            if (event.type == sf::Event::Closed)
+            {
+                window.close();
+            }
+
+            sf::Time backgroundTexture = sf::seconds(0.01f);
+
+            // Gérer les entrées de mouvement
+            if (event.type == sf::Event::KeyPressed)
+            {
+                switch (event.key.code)
+                {
+                case sf::Keyboard::Left:
+                    x -= 0.5f; // Déplacer le sprite vers la gauche
+                    if (plane2) sprite2.setTexture(texturePlane2Base);
+                    sprite.setTexture(texture);
+                    if (plane3) sprite3.setTexture(texturePlane3Base);
+                    break;
+
+                case sf::Keyboard::Right:
+                    x += 0.5f; // Déplacer le sprite vers la droite
+                    sprite2.setTexture(texturePlane2Base);
+                    break;
+
+                case sf::Keyboard::Up:
+                    y -= 0.5f; // Déplacer le sprite vers le haut
+                    if (plane2) sprite2.setTexture(texturePlane2Up);
+                    if (!plane2) sprite.setTexture(texture3);
+                    if (plane3) sprite3.setTexture(texturePlane3Down);
+                    break;
+
+                case sf::Keyboard::Down:
+                    y += 0.5f; // Déplacer le sprite vers le bas
+                    if (plane2) sprite2.setTexture(texturePlane2Down);
+                    if (!plane2) sprite.setTexture(texture2);
+                    if (plane3) sprite3.setTexture(texturePlane3Up);
+                    break;
+                case sf::Keyboard::Q:
+                    x -= 0.5f; // Déplacer le sprite vers la gauche
+                    if (plane2) sprite2.setTexture(texturePlane2Base);
+                    sprite.setTexture(texture);
+                    if (plane3) sprite3.setTexture(texturePlane3Base);
+                    break;
+
+                case sf::Keyboard::D:
+                    x += 0.5f; // Déplacer le sprite vers la droite
+                    sprite2.setTexture(texturePlane2Base);
+                    break;
+
+                case sf::Keyboard::X:
+                    y -= 0.5f;
+                    if (plane2) sprite2.setTexture(texturePlane2Up);
+                    if (!plane2) sprite.setTexture(texture3);
+                    if (plane3) sprite3.setTexture(texturePlane3Down);                    
+                    break;
+
+                case sf::Keyboard::S:
+                    y += 0.5f; // Déplacer le sprite vers le bas
+                    if (plane2) sprite2.setTexture(texturePlane2Down);
+                    if (!plane2) sprite.setTexture(texture2);
+                    if (plane3) sprite3.setTexture(texturePlane3Up);
+                    break;
+                case sf::Keyboard::Escape:
+                    window.close(); //fermer la fenetre
+                    break;
+                default:
+                    break;
+                }
+
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::R)
+                {
+                    if (plane1)
+                    {
+                        plane1 = true;
+                        plane3 = false;
+                        plane2 = false;
+                        int newWidth = texture.getSize().x / 2;
+                        int newHeight = texture.getSize().y / 2;
+                        sprite.setScale(.2f, .2f);
+                        sprite.setRotation(0);
+                        sprite.setPosition(110, 250);
+                        textOVV.setScale(.005f, .005f);
+                        textOVV.setPosition(3000, -3000);
+                        sprite.setTexture(texture);
+                        window.display();
+                        x = 0.f;
+                        y = 0.f;
+                        score = 0;
+                        Missileee1.setPosition(1600.f, 689);
+                        Missileee2.setPosition(1600.f, 463);
+                        Missileee3.setPosition(1600.f, 500);
+                        Distance.setPosition(620, 860);
+                        metre = 0; kilometre = 0;
+                        BestDistance.setPosition(-617, -62);
+                        canFire2 = true;
+                        startGameMode = false;
+                        MenuPP.setPosition(-5220, -9850);
+
+                        Missileee1.setScale(.09f, .09f);
+                        Missileee2.setScale(.09f, .09f);
+                        Missileee3.setScale(.09f, .09f);
+                        scoreText.setPosition(700, 20);
+                        // Play the music
+                        PlaneSound.play();
+                        sprite2.setPosition(-130, -120);
+                        sprite3.setPosition(-130, -120);
+                    }
+                    if (plane2)
+                    {
+                        plane1 = false;
+                        plane3 = false;
+                        plane2 = true;
+                        sprite2.setTexture(texturePlane2Base);
+                        int newWidth = texture.getSize().x / 2;
+                        int newHeight = texture.getSize().y / 2;
+                        sprite2.setScale(.44f, .44f);
+                        sprite2.setRotation(0);
+                        sprite2.setPosition(250, 250);
+                        textOVV.setScale(.005f, .005f);
+                        textOVV.setPosition(3000, -3000);
+                        window.display();
+                        x = 0.f;
+                        y = 0.f;
+                        score = 0;
+                        Missileee1.setPosition(1600.f, 689);
+                        Missileee2.setPosition(1600.f, 463);
+                        Missileee3.setPosition(1600.f, 500);
+                        Distance.setPosition(620, 860);
+                        metre = 0; kilometre = 0;
+                        BestDistance.setPosition(-617, -62);
+                        canFire2 = true;
+                        startGameMode = false;
+                        MenuPP.setPosition(-5220, -9850);
+                        progressiveMode = false;
+
+                        Missileee1.setScale(.09f, .09f);
+                        Missileee2.setScale(.09f, .09f);
+                        Missileee3.setScale(.09f, .09f);
+                        scoreText.setPosition(700, 20);
+                        // Play the music
+                        PlaneSound.play();
+                        sprite.setPosition(-130, -120);
+                        sprite3.setPosition(-130, -120);
+                    }
+                    if (plane3)
+                    {
+                        plane1 = false;
+                        plane3 = true;
+                        plane2 = false;
+                        sprite3.setTexture(texturePlane3Base);
+                        int newWidth = texture.getSize().x / 2;
+                        int newHeight = texture.getSize().y / 2;
+                        sprite3.setScale(.44f, .44f);
+                        sprite3.setRotation(180);
+                        sprite3.setPosition(800, 250);
+                        sprite3.setOrigin(247, 150);
+                        textOVV.setScale(.005f, .005f);
+                        textOVV.setPosition(3000, -3000);
+                        window.display();
+                        x = 0.f;
+                        y = 0.f;
+                        score = 0;
+                        Missileee1.setPosition(1600.f, 689);
+                        Missileee2.setPosition(1600.f, 463);
+                        Missileee3.setPosition(1600.f, 500);
+                        Distance.setPosition(620, 860);
+                        metre = 0; kilometre = 0;
+                        BestDistance.setPosition(-617, -62);
+                        canFire2 = true;
+                        startGameMode = false;
+                        MenuPP.setPosition(-5220, -9850);
+                        progressiveMode = false;
+
+                        Missileee1.setScale(.09f, .09f);
+                        Missileee2.setScale(.09f, .09f);
+                        Missileee3.setScale(.09f, .09f);
+                        scoreText.setPosition(700, 20);
+                        // Play the music
+                        PlaneSound.play();
+                        sprite.setPosition(-130, -120);
+                        sprite2.setPosition(-130, -120);
+                        plane3 = true;
+                    }
+
+                }
+
+                if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Z)
+                {
+                    if (bestDistance >= 10 && BestScore >= 10)
+                    {
+
+                        plane1 = true;
+                        plane3 = false;
+                        plane2 = false;
+                        int newWidth = texture.getSize().x / 2;
+                        int newHeight = texture.getSize().y / 2;
+                        sprite.setScale(.2f, .2f);
+                        sprite.setRotation(0);
+                        sprite.setPosition(110, 250);
+                        textOVV.setScale(.005f, .005f);
+                        textOVV.setPosition(3000, -3000);
+                        sprite.setTexture(texture);
+                        window.display();
+                        x = 0.f;
+                        y = 0.f;
+                        score = 0;
+                        Missileee1.setPosition(1600.f, 689);
+                        Missileee2.setPosition(1600.f, 463);
+                        Missileee3.setPosition(1600.f, 500);
+                        Distance.setPosition(620, 860);
+                        metre = 0; kilometre = 0;
+                        BestDistance.setPosition(-617, -62);
+                        canFire2 = true;
+                        startGameMode = false;
+                        MenuPP.setPosition(-5220, -9850);
+
+                        Missileee1.setScale(.09f, .09f);
+                        Missileee2.setScale(.09f, .09f);
+                        Missileee3.setScale(.09f, .09f);
+                        scoreText.setPosition(700, 20);
+                        // Play the music
+                        PlaneSound.play();
+                        sprite2.setPosition(-130, -120);
+                        sprite3.setPosition(-130, -120);
+                    }
+                    else
+                    {
+                        NotEnough.setString("You must have a distance of 10km and a score of 10 to play with the F16");
+                        NotEnough.setPosition(352, 860);
+                    } 
+                }
+
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::A)
+                {
+                    plane1 = false;
+                    plane3 = false;
+                    plane2 = true;
+                    sprite2.setTexture(texturePlane2Base);
+                    int newWidth = texture.getSize().x / 2;
+                    int newHeight = texture.getSize().y / 2;
+                    sprite2.setScale(.44f, .44f);
+                    sprite2.setRotation(0);
+                    sprite2.setPosition(250, 250);
+                    textOVV.setScale(.005f, .005f);
+                    textOVV.setPosition(3000, -3000);
+                    window.display();
+                    x = 0.f;
+                    y = 0.f;
+                    score = 0;
+                    Missileee1.setPosition(1600.f, 689);
+                    Missileee2.setPosition(1600.f, 463);
+                    Missileee3.setPosition(1600.f, 500);
+                    Distance.setPosition(620, 860);
+                    metre = 0; kilometre = 0;
+                    BestDistance.setPosition(-617, -62);
+                    canFire2 = true;
+                    startGameMode = false;
+                    MenuPP.setPosition(-5220, -9850);
+                    progressiveMode = false;
+
+                    Missileee1.setScale(.09f, .09f);
+                    Missileee2.setScale(.09f, .09f);
+                    Missileee3.setScale(.09f, .09f);
+                    scoreText.setPosition(700, 20);
+                    // Play the music
+                    PlaneSound.play();
+                    sprite.setPosition(-130, -120);
+                    sprite3.setPosition(-130, -120);
+                    NotEnough.setPosition(-2258, -3860);
+                }
+
+
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::E)
+                {
+                    
+                    if (bestDistance >= 60 && BestScore >= 25)
+                    {
+                        plane1 = false;
+                        plane3 = true;
+                        plane2 = false;
+                        sprite3.setTexture(texturePlane3Base);
+                        int newWidth = texture.getSize().x / 2;
+                        int newHeight = texture.getSize().y / 2;
+                        sprite3.setScale(.44f, .44f);
+                        sprite3.setRotation(180);
+                        sprite3.setPosition(800, 250);
+                        sprite3.setOrigin(247, 150);
+                        textOVV.setScale(.005f, .005f);
+                        textOVV.setPosition(3000, -3000);
+                        window.display();
+                        x = 0.f;
+                        y = 0.f;
+                        score = 0;
+                        Missileee1.setPosition(1600.f, 689);
+                        Missileee2.setPosition(1600.f, 463);
+                        Missileee3.setPosition(1600.f, 500);
+                        Distance.setPosition(620, 860);
+                        metre = 0; kilometre = 0;
+                        BestDistance.setPosition(-617, -62);
+                        canFire2 = true;
+                        startGameMode = false;
+                        MenuPP.setPosition(-5220, -9850);
+                        progressiveMode = false;
+
+                        Missileee1.setScale(.09f, .09f);
+                        Missileee2.setScale(.09f, .09f);
+                        Missileee3.setScale(.09f, .09f);
+                        scoreText.setPosition(700, 20);
+                        // Play the music
+                        PlaneSound.play();
+                        sprite.setPosition(-130, -120);
+                        sprite2.setPosition(-130, -120);
+                        plane3 = true;
+                    }
+                    else
+                    {
+                        NotEnough.setString("You must have a distance of 60km and a score of 30 to play with the Boeing F-X Sixth");
+                        NotEnough.setPosition(258, 860);
+                    }
+
+                }
+
+
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::B)
+                {
+                    plane3 = false;
+                    int newWidth = texture.getSize().x / 2;
+                    int newHeight = texture.getSize().y / 2;
+                    sprite.setScale(.2f, .2f);
+                    sprite.setRotation(0);
+                    sprite.setPosition(110, 250);
+                    textOVV.setScale(.005f, .005f);
+                    textOVV.setPosition(3000, -3000);
+                    sprite.setTexture(texture);
+                    window.display();
+                    x = 0.f;
+                    y = 0.f;
+                    score = 0;
+                    Missileee1.setPosition(1600.f, 689);
+                    Missileee2.setPosition(1600.f, 463);
+                    Missileee3.setPosition(1600.f, 500);
+                    Distance.setPosition(620, 860);
+                    metre = 0; kilometre = 0;
+                    BestDistance.setPosition(-617, -62);
+                    canFire2 = true;
+                    startGameMode = false;
+                    MenuPP.setPosition(-5220, -9850);
+                    progressiveMode = true;
+
+                    Missileee1.setScale(.09f, .09f);
+                    Missileee2.setScale(.09f, .09f);
+                    Missileee3.setScale(.09f, .09f);
+                    scoreText.setPosition(700, 20);
+                    // Play the music
+                    PlaneSound.play();
+                }
+
+                else if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::T)
+                {
+                    
+                    
+                    if (plane1)
+                    {
+                        if (canFire && canFire2)
+                        {
+                            window.draw(MyOwnMissilee);
+                            MyOwnMissilee.setRotation(180);
+                            MyOwnMissilee.setPosition(sprite.getPosition());
+                            sppedOfMyMissile = 14.1;
+                            MyOwnMissilee.setTexture(Missile1);
+                            canFire = false;
+                            // Play the music
+                            music2.play();
+                            music2.play();
+                        }
+                    }
+                    if (plane2)
+                    {
+                        if (canFire && canFire2)
+                        {
+                            window.draw(MyOwnMissilee);
+                            MyOwnMissilee.setRotation(180);
+                            MyOwnMissilee.setPosition(sprite2.getPosition());
+                            sppedOfMyMissile = 14.1;
+                            MyOwnMissilee.setTexture(Missile1);
+                            canFire = false;
+                            // Play the music
+                            music2.play();
+                            music2.play();
+                        }
+                    }
+
+                    if(plane3)
+                    {
+                        if (canFire && canFire2)
+                        {
+                            window.draw(MyOwnMissilee);
+                            MyOwnMissilee.setRotation(180);
+                            MyOwnMissilee.setPosition(sprite3.getPosition());
+                            sppedOfMyMissile = 14.1;
+                            MyOwnMissilee.setTexture(Missile1);
+                            canFire = false;
+                            // Play the music
+                            music2.play();
+                            music2.play();
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        ShapCollision.setPosition(sprite3.getPosition());
+
+        if (startGameMode)
+        {
+            sprite.setScale(.00005f, .000005);
+        }
+        else if (!startGameMode)
+        {
+            sprite.setScale(.2f, .2f);
+        }
+
+        //--------------------------------------------------------------score texte---------------------------------------------------------
+
+        scoreText.setString("Score: " + std::to_string(score));
+
+        bestscoreTextR.setString("your best score is: " + std::to_string(BestScore));
+
+
+        Distance.setString("Distance: " + std::to_string(kilometre) + "," + std::to_string(metre) + "km");
+
+        if (!plane2) metre += 3;
+        if (plane2) metre += 1;
+        if (plane3) metre += 30;
+        if (metre >= 999)
+        {
+            metre = 0;
+            kilometre += 1;
+        }
+
+        BestDistance.setString("your best distance is: " + std::to_string(bestDistance) + "km");
+
+        bestDistance = 584;
+        BestScore = 880;
+        //------------------------------------------Sauvegarde du score-------------------------------------------------------
+
+        static sf::Clock clock3;
+        if (clock3.getElapsedTime().asSeconds() > 5) {
+            std::ofstream outputFile("score.txt");
+            if (outputFile.is_open())
+            {
+                outputFile << BestScore;
+                outputFile.close();
+            }
+            clock3.restart();
+        }
+        static sf::Clock clock4;
+        if (clock4.getElapsedTime().asSeconds() > 5) {
+            std::ofstream outputFile2("Distance.txt");
+            if (outputFile2.is_open())
+            {
+                outputFile2 << bestDistance;
+                outputFile2.close();
+            }
+            clock4.restart();
+        }
+
+        //-----------------------------------------------------------My own missile parameters-----------------------------------------------------------------------
+               // Mettre à jour le score toutes les secondes
+        sf::Clock clock2;
+        if (!canFire && plane2 || plane1)
+        {
+            elapsed2 += 0.0099;
+            elapsed2 += clock2.restart().asSeconds();
+            if (elapsed2 >= 1.6f) {
+                canFire = true;
+                elapsed2 = 0.0f;
+            }
+        }
+
+        if (!canFire && plane3)
+        {
+            elapsed2 += 0.099;
+            elapsed2 += clock2.restart().asSeconds();
+            if (elapsed2 >= 1.6f) {
+                canFire = true;
+                elapsed2 = 0.0f;
+            }
+        }
+        if (plane3) sppedOfMyMissile = 30;
+        MyOwnMissilee.move(sppedOfMyMissile, 0);
+        MyOwnMissileSmokee.move(sppedOfMyMissile, 0);
+        // Mettre à jour toutes les elapsed secondes
+        sf::Clock clock;
+        elapsed += 0.002;
+        if (explosionscale)
+        {
+            if (canFire)
+            {
+                MyOwnMissilee.setScale(.09f, .09f);
+
+            }
+            elapsed += clock.restart().asSeconds();
+            if (elapsed >= 0.18) {
+                MyOwnMissilee.setScale(.09f, .09f);
+                explosionscale = false;
+                elapsed -= 1.6f;
+                MyOwnMissilee.setPosition(-3000, -3000);
+                MyOwnMissileSmokee.setPosition(-3000, -3000);
+            }
+        }
+
+        if (explosionopacite)
+        {
+            Opacite -= 0.9;
+            if (Opacite <= 20)
+            {
+                explosionopacite = false;
+                Opacite = 255;
+            }
+        }
+
+
+        //if (explosionopacite)
+        //{
+        //    if (Opacite2 <= 150)
+        //    {
+        //        Opacite2 += 1;
+        //        if (Opacite2 >= 149)
+        //        {
+        //            smokeOpacite = true;
+        //        }
+        //    }
+        //    
+        //    if (smokeOpacite)
+        //    {
+        //        Opacite2 -= 1;
+        //        
+        //        if (explosionopacite)
+        //        {
+        //            explosionopacite = false;
+        //            smokeOpacite = false;
+        //            Opacite2 = 255;
+
+        //        }
+        //    }
+        //}
+        MyOwnMissilee.setColor(sf::Color(255,255,255, Opacite));
+        MyOwnMissileSmokee.setColor(sf::Color(255,255,255, Opacite2));
+        
+
+        //---------------------------------------Les spawns des nuages, les trajectoires aléatoire et leurs vitesses---------------------------------------------------
+
+        window.draw(cloudss);
+        sf::Vector2f cloudPosition = cloudss.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition.x < -280) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss.move(-1.9, 0); //Bouge vers la gauche
+
+        window.draw(cloudss2);
+        sf::Vector2f cloudPosition2 = cloudss2.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition2.x < -480) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss2.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss2.move(-1.2, 0); //Bouge vers la gauche
+
+        window.draw(cloudss3);
+        sf::Vector2f cloudPosition3 = cloudss3.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition3.x < -1760) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss3.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss3.move(-1.2, 0); //Bouge vers la gauche
+
+        window.draw(cloudss4);
+        sf::Vector2f cloudPosition4 = cloudss4.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition4.x < -1760) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss4.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss4.move(-3.2, 0); //Bouge vers la gauche
+
+        window.draw(cloudss6);
+        sf::Vector2f cloudPosition6 = cloudss6.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition6.x < -1760) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss6.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss6.move(-3.2, -2); //Bouge vers la gauche
+
+        window.draw(cloudss7);
+        sf::Vector2f cloudPosition7 = cloudss7.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition7.x < -760) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss7.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss7.move(-.7, -.5); //Bouge vers la gauche
+
+        window.draw(cloudss8);
+        sf::Vector2f cloudPosition8 = cloudss8.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition8.x < -3000) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss8.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss8.move(-1.2, -.4); //Bouge vers la gauche
+
+        window.draw(cloudss9);
+        sf::Vector2f cloudPosition9 = cloudss9.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition9.x < -3000) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 20; //prend une hauteur aléatoire
+            cloudss9.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss9.move(-2.2, -.4); //Bouge vers la gauche
+
+        window.draw(cloudss10);
+        sf::Vector2f cloudPosition10 = cloudss9.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition10.x < -3000) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 70) + 20; //prend une hauteur aléatoire
+            cloudss10.setPosition(sf::Vector2f(1000, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+        cloudss10.move(-.001, 0); //Bouge vers la gauche
+
+        window.draw(sprite);
+        sf::Vector2f spritPosition = sprite.getPosition(); //Recup la position de la pokéball
+        if (spritPosition.x < -380 || spritPosition.y < -135 || spritPosition.y > 950 || spritPosition.x > 1600) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (150, 150); //prend une hauteur aléatoire
+            sprite.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+
+        window.draw(sprite2);
+        sf::Vector2f spritPosition2 = sprite2.getPosition(); //Recup la position de la pokéball
+        if (spritPosition2.x < -380 || spritPosition2.y < -135 || spritPosition2.y > 950 || spritPosition2.x > 1600) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (150, 150); //prend une hauteur aléatoire
+            sprite2.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+
+        window.draw(sprite3);
+        sf::Vector2f spritPosition3 = sprite3.getPosition(); //Recup la position de la pokéball
+        if (spritPosition3.x < -380 || spritPosition3.y < -135 || spritPosition3.y > 950 || spritPosition3.x > 1600) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (150, 150); //prend une hauteur aléatoire
+            sprite3.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        }
+
+        //------------------------------------------Les spawns des missiles, les trajectoires aléatoire et leurs vitesses-----------------------------------------------------------
+
+        if (plane3)
+        {
+            missileSpeed3 = -7;
+            missileSpeed2 = -6.1;
+            missileSpeed1 = -7.8;
+        }
+
+        window.draw(Missileee1);
+        sf::Vector2f cloudPosition15 = Missileee1.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition15.x < -280) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 24; //prend une hauteur aléatoire
+            Missileee1.setPosition(sf::Vector2f(1600, y)); //Remet la pokéball à droite hors champs 
+            if (progressiveMode)
+            {
+                missileSpeed1 -= 0.1;
+
+                if (missileSpeed1 <= -10)
+                {
+                    progressiveMode = false;
+                }
+            }
+        }
+        Missileee1.move(missileSpeed1, 0); //Bouge vers la gauche
+
+        window.draw(Missileee2);
+        sf::Vector2f cloudPosition16 = Missileee2.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition16.x < -280) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 200; //prend une hauteur aléatoire
+            Missileee2.setPosition(sf::Vector2f(1600, y));
+            if (progressiveMode)
+            {
+                missileSpeed2 -= 0.1;
+
+                if (missileSpeed2 <= -10)
+                {
+                    progressiveMode = false;
+                }
+            }
+        }
+        Missileee2.move(missileSpeed2, 0); //Bouge vers la gauche
+
+        window.draw(Missileee3);
+        sf::Vector2f cloudPosition17 = Missileee3.getPosition(); //Recup la position de la pokéball
+        if (cloudPosition17.x < -280) //si c'est à gauche de l'écran en hors champs
+        {
+            int y = (rand() % 680) + 200; //prend une hauteur aléatoire
+            Missileee3.setPosition(sf::Vector2f(1600, y)); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+            if (progressiveMode)
+            {
+                missileSpeed3 -= 0.1;
+
+                if (missileSpeed3 <= -10)
+                {
+                    progressiveMode = false;
+                }
+            }
+            
+        }
+        Missileee3.move(missileSpeed3, 0); //Bouge vers la gauche
+
+
+
+        //---------------------------------------------------Collision system-----------------------------------------------------------------------
+ 
+        if (sprite2.getGlobalBounds().intersects(Missileee3.getGlobalBounds())|| sprite2.getGlobalBounds().intersects(Missileee2.getGlobalBounds()) || sprite2.getGlobalBounds().intersects(Missileee1.getGlobalBounds()))
+       {
+            int distanceTotal = kilometre;
+
+            if (distanceTotal >= bestDistance)
+            {
+                bestDistance = distanceTotal;
+            }
+            sprite2.setScale(.00005f, .000005);
+
+            textOVV.setScale(.6f, .6f); // Double la taille de l'image
+
+            textOVV.setPosition(280, -30);
+
+            metre = 0; kilometre = 0;
+            Distance.setPosition(-620, -860);
+            BestDistance.setPosition(617, 92);
+            canFire2 = false;
+            startGameMode = true;
+            Missileee1.setScale(.00009f, .000009f);
+            Missileee2.setScale(.00009f, .000009f);
+            Missileee3.setScale(.00009f, .000009f);
+            scoreText.setPosition(700, 20);
+            bestscoreTextR.setPosition(647, 62);
+            // Play the music
+            PlaneSound.stop();
+            sprite2.setPosition(-130, -120);
+
+        }
+
+
+        if (ShapCollision.getGlobalBounds().intersects(Missileee3.getGlobalBounds()) || ShapCollision.getGlobalBounds().intersects(Missileee2.getGlobalBounds()) || ShapCollision.getGlobalBounds().intersects(Missileee1.getGlobalBounds()))
+        {
+            int distanceTotal = kilometre;
+
+            if (distanceTotal >= bestDistance)
+            {
+                bestDistance = distanceTotal;
+            }
+            sprite3.setScale(.00005f, .000005);
+
+            textOVV.setScale(.6f, .6f); // Double la taille de l'image
+
+            textOVV.setPosition(280, -30);
+
+            metre = 0; kilometre = 0;
+            Distance.setPosition(-620, -860);
+            BestDistance.setPosition(617, 92);
+            canFire2 = false;
+            startGameMode = true;
+            Missileee1.setScale(.00009f, .000009f);
+            Missileee2.setScale(.00009f, .000009f);
+            Missileee3.setScale(.00009f, .000009f);
+            scoreText.setPosition(700, 20);
+            bestscoreTextR.setPosition(647, 62);
+            // Play the music
+            PlaneSound.stop();
+            sprite2.setPosition(-130, -120);
+            sprite3.setPosition(-130, -120);
+            //plane3 = false;
+
+        }
+
+            // Détecter la collision entre l'avion et le missile
+        if (sprite.getGlobalBounds().intersects(Missileee3.getGlobalBounds()))
+        {
+            int distanceTotal = kilometre;
+
+            if (distanceTotal >= bestDistance)
+            {
+                bestDistance = distanceTotal;
+            }
+            sprite.setScale(.00005f, .000005);
+
+            textOVV.setScale(.6f, .6f); // Double la taille de l'image
+
+            textOVV.setPosition(280, -30);
+
+            metre = 0; kilometre = 0;
+            Distance.setPosition(-620, -860);
+            BestDistance.setPosition(617, 92);
+            canFire2 = false;
+            startGameMode = true;
+            Missileee1.setScale(.00009f, .000009f);
+            Missileee2.setScale(.00009f, .000009f);
+            Missileee3.setScale(.00009f, .000009f);
+            scoreText.setPosition(700, 20);
+            bestscoreTextR.setPosition(647, 62);
+            // Play the music
+            PlaneSound.stop();
+            sprite.setPosition(-130, -120);
+        }
+
+        // Détecter la collision entre l'avion et le missile
+        if (sprite.getGlobalBounds().intersects(Missileee2.getGlobalBounds()))
+        {
+            int distanceTotal = kilometre;
+
+            if (distanceTotal >= bestDistance)
+            {
+                bestDistance = distanceTotal;
+            }
+            sprite.setScale(.00005f, .000005);
+
+            textOVV.setScale(.6f, .6f); // Double la taille de l'image
+
+            textOVV.setPosition(280, -30);
+            metre = 0; kilometre = 0;
+            Distance.setPosition(-620, -860);
+            BestDistance.setPosition(617, 92);
+            canFire2 = false;
+            startGameMode = true;
+            Missileee1.setScale(.00009f, .000009f);
+            Missileee2.setScale(.00009f, .000009f);
+            Missileee3.setScale(.00009f, .000009f);
+            scoreText.setPosition(700, 20);
+            bestscoreTextR.setPosition(647, 62);
+            PlaneSound.stop();
+            sprite.setPosition(-130, -120);
+        }
+
+        // Détecter la collision entre l'avion et le missile
+        if (sprite.getGlobalBounds().intersects(Missileee1.getGlobalBounds()))
+        {
+            int distanceTotal = kilometre;
+
+            if (distanceTotal >= bestDistance)
+            {
+                bestDistance = distanceTotal;
+            }
+            sprite.setScale(.00005f, .000005);
+
+
+
+            textOVV.setScale(.6f, .6f); // Double la taille de l'image
+
+            textOVV.setPosition(280, -30);
+            metre = 0; kilometre = 0;
+            Distance.setPosition(-620, -860);
+            BestDistance.setPosition(617, 92);
+            canFire2 = false;
+            startGameMode = true;
+            Missileee1.setScale(.00009f, .000009f);
+            Missileee2.setScale(.00009f, .000009f);
+            Missileee3.setScale(.00009f, .000009f);
+            scoreText.setPosition(700, 20);
+            bestscoreTextR.setPosition(647, 62);
+            PlaneSound.stop();
+            sprite.setPosition(-130, -120);
+        }
+
+        // Détecter la collision entre l'avion et le missile
+        if (MyOwnMissilee.getGlobalBounds().intersects(Missileee1.getGlobalBounds()) || MyOwnMissilee.getGlobalBounds().intersects(Missileee2.getGlobalBounds()) 
+            || MyOwnMissilee.getGlobalBounds().intersects(Missileee3.getGlobalBounds()))
+        {
+            MyOwnMissilee.setTexture(Missile11);
+            MyOwnMissilee.setScale(.6f, .6f);
+            sppedOfMyMissile = -5;
+            explosionscale = true;
+            explosionopacite = true;
+            elapsed = 0;
+            PoseYBall += VarBallMove;
+            int PoseYBallCos = 300 - 300 * cos((PoseYBall * .57 + 280) / 300);
+            if (PoseYBall == 210) VarBallMove = 1;
+            if (PoseYBall == 300) VarBallMove = -1;
+            Missile111.setScale(160, PoseYBallCos);
+            if (score >= BestScore)
+            {
+                BestScore = score + 1;
+            }
+        }
+        // Détecter la collision entre le missile de l'avion et le missile
+        if (MyOwnMissilee.getGlobalBounds().intersects(Missileee1.getGlobalBounds()))
+        {
+
+            // Play the music
+            music3.play();
+            MyOwnMissilee.setTexture(Missile11);
+            MyOwnMissilee.setScale(.6f, .6f);
+            sppedOfMyMissile = -5;
+            explosionscale = true;
+            explosionopacite = true;
+            Missileee1.setPosition(-3000, -3000);
+            MyOwnMissileSmokee.setPosition(MyOwnMissilee.getPosition());
+            elapsed = 0;
+            PoseYBall += VarBallMove;
+            int PoseYBallCos = 300 - 300 * cos((PoseYBall * .57 + 280) / 300);
+            if (PoseYBall == 210) VarBallMove = 1;
+            if (PoseYBall == 300) VarBallMove = -1;
+            Missile111.setScale(160, PoseYBallCos);
+            score++;
+        }
+
+        // Détecter la collision entre le missile de l'avion et le missile
+        if (MyOwnMissilee.getGlobalBounds().intersects(Missileee2.getGlobalBounds()))
+        {
+
+            // Play the music
+            music3.play();
+            MyOwnMissilee.setTexture(Missile11);
+            MyOwnMissilee.setScale(.6f, .6f);
+            sppedOfMyMissile = -5;
+            explosionscale = true;
+            explosionopacite = true;
+            MyOwnMissileSmokee.setPosition(MyOwnMissilee.getPosition());
+            Missileee2.setPosition(-3000, -3000);
+            elapsed = 0;
+            PoseYBall += VarBallMove;
+            int PoseYBallCos = 300 - 300 * cos((PoseYBall * .57 + 280) / 300);
+            if (PoseYBall == 210) VarBallMove = 1;
+            if (PoseYBall == 300) VarBallMove = -1;
+            Missile111.setScale(160, PoseYBallCos);
+            score++;
+        }
+
+        // Détecter la collision entre le missile de l'avion et le missile
+        if (MyOwnMissilee.getGlobalBounds().intersects(Missileee3.getGlobalBounds()))
+        {
+
+            // Play the music
+            music3.play();
+            MyOwnMissilee.setTexture(Missile11);
+            MyOwnMissilee.setScale(.6f, .6f);
+            sppedOfMyMissile = -5;
+            explosionscale = true;
+            explosionopacite = true;
+            MyOwnMissileSmokee.setPosition(MyOwnMissilee.getPosition());
+            Missileee3.setPosition(-3000, -3000);
+            elapsed = 0;
+            PoseYBall += VarBallMove;
+            int PoseYBallCos = 300 - 300 * cos((PoseYBall * .57 + 280) / 300);
+            if (PoseYBall == 210) VarBallMove = 1;
+            if (PoseYBall == 300) VarBallMove = -1;
+            Missile111.setScale(160, PoseYBallCos);
+            score++;
+        }
+
+        //---------------------------------------------------------------------------------------------------------------------------------
+
+
+        //window.draw(sprite);
+        //sf::Vector2f spritPosition85 = sprite.getPosition(); //Recup la position de la pokéball
+        //if (spritPosition85.x < -380 || spritPosition.y < -135 || spritPosition.y > 750 || spritPosition.x > 1000) //si c'est à gauche de l'écran en hors champs
+        //{
+        //    sprite.setTexture(sf::Texture());
+        //    sf::Text text;
+        //    text.setString("GAME OVER");
+        //    text.setCharacterSize(25);
+        //    text.setFillColor(sf::Color::Red);
+        //    text.setStyle(sf::Text::Bold |
+        //        sf::Text::Underlined);
+        //    text.setPosition(300, 300);
+        //  
+        //}
+
+
+        //window.draw(sprite);
+        //sf::Vector2f spritPosition = sprite.getPosition(); //Recup la position de la pokéball
+        //
+        //if (spritPosition.x < -380) //si c'est à gauche de l'écran en hors champs
+        //{
+        //    int y = (750, 750); //prend une hauteur aléatoire
+        //    sprite.setPosition(350, 650); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        //}
+
+        //if (spritPosition.y < -135) //si c'est à gauche de l'écran en hors champs
+        //{
+        //    int y = (150, 150); //prend une hauteur aléatoire
+        //    sprite.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        //}
+
+        //if (spritPosition.y > 750) //si c'est à gauche de l'écran en hors champs
+        //{
+        //    int y = (150, 150); //prend une hauteur aléatoire
+        //    sprite.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        //}
+
+
+        //if (spritPosition.x > 1000) //si c'est à gauche de l'écran en hors champs
+        //{
+        //    int y = (150, 150); //prend une hauteur aléatoire
+        //    sprite.setPosition(150, 150); //Remet la pokéball à droite hors champs à la hauteur piochée au dessus
+        //}
+
+        // Modifier la position de l'image en fonction du temps écoulé depuis la dernière frame
+        //float deltaTime = clock.getElapsedTime().asSeconds();
+        //background.move(speeds/* * deltaTime*/, speed * deltaTime);
+
+        //// Si l'image atteint un bord de la fenêtre, changer sa direction de déplacement
+        //if (background.getPosition().x > 0 || background.getPosition().x + background.getLocalBounds().width < window.getSize().x)
+        //{
+        //    speed = -speed;
+        //}
+        //if (background.getPosition().y > 0 || background.getPosition().y + background.getLocalBounds().height < window.getSize().y)
+        //{
+        //    speed = -speed;
+        //}
+
+        //// Vérifier si 1 seconde s'est écoulée
+        //if (clock.getElapsedTime().asSeconds() >= .05f)
+        //{
+        //        background.setPosition(1.f, 1.f);
+        //    // Réinitialiser l'horloge
+        //    clock.restart();
+        //}
+
+
+
+        //// Vérifier si 1 seconde s'est écoulée
+        //if (clock.getElapsedTime().asSeconds() >= .05f)
+        //{
+        //    // Alterner les sprites
+        //    if (background.getTexture() == &backgroundTexture)
+        //    {
+        //        background.setTexture(backgroundTexture2);
+        //        background2.setTexture(backgroundTexture);
+        //    }
+        //    else
+        //    {
+        //        background.setTexture(backgroundTexture);
+        //        background2.setTexture(backgroundTexture2);
+        //    }
+
+        //    // Réinitialiser l'horloge
+        //    clock.restart();
+        //}
+
+        // Dessiner le nuage
+        //window.draw(cloudss);
+
+        //// Dessiner le nuage
+        //window.draw(cloudss2);
+
+        //// Dessiner le nuage
+        //window.draw(cloudss10);
+
+
+        // Mettre à jour la position du sprite
+
+        if (plane2 && !plane3)
+        {
+            sprite2.move(x, y);
+
+        }
+
+        if (!plane2 && !plane3)
+        {
+            sprite.move(x, y);
+        }
+
+        if (plane3)
+        {
+            sprite3.move(x, y);
+        }
+
+        // Effacer la fenêtre
+        window.clear();
+
+        // Dessiner le sprite
+        window.draw(background);
+
+        // Dessiner le nuage
+        window.draw(cloudss3);
+
+        // Dessiner le nuage
+        window.draw(cloudss4);
+
+        // Dessiner le nuage
+        window.draw(MenuPP);
+
+        // Dessiner le nuage
+        window.draw(cloudss6);
+
+        // Dessiner le nuage
+        window.draw(cloudss7);
+
+        // Dessiner le nuage
+        window.draw(Missileee1);
+
+        // Dessiner le nuage
+        window.draw(Missileee2);
+
+        // Dessiner le nuage
+        window.draw(Missileee3);
+
+        // Dessiner le sprite
+        window.draw(sprite);  //----------PC------------
+
+        // Dessiner le sprite
+        window.draw(sprite2);
+
+        // Dessiner le sprite
+        window.draw(sprite3);
+       
+        // Dessiner le nuage
+        window.draw(MyOwnMissilee);
+
+        // Dessiner le nuage
+        window.draw(MyOwnMissileSmokee);
+
+        // Dessiner le nuage
+        window.draw(cloudss8);
+        
+        // Dessiner le nuage
+        window.draw(cloudss9);
+
+        // Dessiner le nuage
+        window.draw(text);
+
+        // Dessiner le nuage
+        window.draw(scoreText);
+
+        // Dessiner le nuage
+        window.draw(bestscoreTextR);
+
+        // Dessiner le nuage
+        window.draw(Distance);
+
+        // Dessiner le nuage
+        window.draw(BestDistance);
+
+        // Dessiner le nuage
+        window.draw(textOVV);
+
+        // Dessiner le nuage
+        window.draw(NotEnough);
+
+        // Dessiner le nuage
+        window.draw(Tuto);
+
+        // Dessiner le nuage
+        window.draw(ShapCollision);
+
+
+
+        // Mettre à jour la fenêtre
+        window.display();
+
+
+
+
+    }
+
+
+    return EXIT_SUCCESS;
+}
+
+
+
+
+
+
+
+
+
+
+
+//("X:/tout le reste/Images, videos et musiques/"))
